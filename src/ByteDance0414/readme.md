@@ -1,6 +1,6 @@
-#bytedance 04.14
+# bytedance 04.14
 
-##Test2 - 建筑物 玩游戏 能量值
+## Test2 - 建筑物 玩游戏 能量值
 能量值 `e`, 高度 `h`
 ```  
 1. e > h: e += e - h  
