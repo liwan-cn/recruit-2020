@@ -42,6 +42,11 @@ public class TopoSort {
         return topoSort(graph, inDegree, res);
     }
 
+    public static boolean topoSort(List<int []> edges, int n, List<Integer> res){
+        List<Integer>[] graph = TopoSort.buildGraph(edges, n);
+        return topoSort(graph, res);
+    }
+
     public static List<Integer>[] buildGraph(List<int []> edges, int n){
         List<Integer>[] graph = new List[n];
         for (int i = 0; i < graph.length; i++) {

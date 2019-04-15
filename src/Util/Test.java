@@ -12,7 +12,8 @@ import static Util.util.TopoSort.topoSort;
 
 public class Test {
     public static void main(String[] args) {
-        testComb();
+        testTopoSort();
+        //testComb();
     }
     public static void testTopoSort() {
         List<int []> edges = new ArrayList<>();
@@ -20,12 +21,13 @@ public class Test {
         edges.add(new int[]{0, 2});
         edges.add(new int[]{1, 3});
         edges.add(new int[]{3, 2});
-        edges.add(new int[]{4, 3});
+        edges.add(new int[]{3, 4});
         edges.add(new int[]{2, 4});
         //edges.add(new int[]{0, 1});
         List<Integer> res = new ArrayList<>();
-        List<Integer>[] graph = TopoSort.buildGraph(edges, 5);
-        System.out.println(topoSort(graph, res));
+        //List<Integer>[] graph = TopoSort.buildGraph(edges, 5);
+        //System.out.println(topoSort(graph, res));
+        System.out.println(topoSort(edges, 5, res));
         System.out.println(res);
     }
 
