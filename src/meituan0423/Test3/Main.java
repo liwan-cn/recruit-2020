@@ -3,6 +3,7 @@ package meituan0423.Test3;
 import java.util.*;
 
 public class Main {
+
     static class Rect{
         int x1, y1, x2, y2;
         Rect(int x1, int y1, int x2, int y2){
@@ -10,6 +11,7 @@ public class Main {
             this.x2 = x2; this.y2 = y2;
         }
     }
+
     static class Interval{
         int start, end;
         Interval(int start, int end){
@@ -20,6 +22,7 @@ public class Main {
             return "{start: " + start + ", end: " + end + "}";
         }
     }
+
     static class Line{
         int index, flag, start, end;
         Line(int index, int flag, int start, int end){
@@ -28,9 +31,10 @@ public class Main {
         }
         @Override
         public String toString(){
-            return "{index: " + index + ", flag: " + flag  + ", start: " + start + ", eend: " + end + "}";
+            return "{index: " + index + ", flag: " + flag  + ", start: " + start + ", end: " + end + "}";
         }
     }
+
     private static List<Interval> generateIntervals(Rect [] rects){
         List<Integer> xs = new ArrayList<>();
         for (Rect rect : rects){
@@ -44,6 +48,7 @@ public class Main {
         }
         return intervals;
     }
+
     private static List<Line> generateLines(Rect [] rects){
         List<Line> lines = new ArrayList<>();
         for (Rect rect : rects){
@@ -53,6 +58,7 @@ public class Main {
         Collections.sort(lines, (o1, o2) -> (o1.index == o2.index ? o1.flag - o2.flag : o1.index - o2.index));
         return lines;
     }
+
     private static int getArea(List<Interval> intervals, List<Line> lines){
         int res = 0;
         for (Interval interval : intervals){
@@ -70,6 +76,7 @@ public class Main {
         }
         return res;
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();

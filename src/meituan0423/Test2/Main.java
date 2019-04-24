@@ -1,13 +1,5 @@
 package meituan0423.Test2;
 
-/*
-4
-1 2 2 2
-2 2 3 2
-3 1 3 2
-3 2 3 3
-*/
-
 import java.util.*;
 
 public class Main {
@@ -141,3 +133,11 @@ public class Main {
         System.out.println(pointCount - crossPointCount);
     }
 }
+
+/*
+4
+1 2 2 2
+2 2 3 2
+3 1 3 2
+3 2 3 3
+*/

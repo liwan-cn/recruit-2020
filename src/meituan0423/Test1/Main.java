@@ -50,7 +50,6 @@ public class Main {
 1 1 1
 1 1 1
 
-
 3 3
 1 1 1
 1 5 1
