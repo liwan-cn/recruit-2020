@@ -44,7 +44,7 @@ public class Main {
         }
         return intervals;
     }
-    private static List<Line> generateILines(Rect [] rects){
+    private static List<Line> generateLines(Rect [] rects){
         List<Line> lines = new ArrayList<>();
         for (Rect rect : rects){
             lines.add(new Line(rect.y1, 1, rect.x1, rect.x2));
@@ -71,10 +71,6 @@ public class Main {
         return res;
     }
     public static void main(String[] args) {
-//        List<Integer> a = new ArrayList<>();
-//        int b = 1, c = 1;
-//        a.add(b); a.add(c);
-//        System.out.println(a.get(0) == a.get(1));
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         Rect []rects = new Rect[n];
@@ -82,7 +78,7 @@ public class Main {
             rects[n] = new Rect(sc.nextInt(), sc.nextInt(), sc.nextInt(), sc.nextInt());
         }
         List<Interval> intervals = generateIntervals(rects);
-        List<Line> lines = generateILines(rects);
+        List<Line> lines = generateLines(rects);
         System.out.println(intervals);
         System.out.println(lines);
         System.out.println(getArea(intervals, lines));
