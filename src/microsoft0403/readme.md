@@ -6,5 +6,5 @@
  
  *`[1, 4, 3, 1, 5]` ==> 3次* 
 
-1. ***消除 `arr[i to j]`, `dp[i, j] = min(dp[i, k] + dp[k+1, j]), k <= i to j-1`***
+1. ***消除 `arr[i to j]`, `dp[i, j] = min(dp[i, k] + dp[k+1, j]), k from i to j-1`***
 2. ***如果 `arr[i] == arr[j],  dp[i, j] = min(dp[i, j], dp[i+1, j-1])`***
