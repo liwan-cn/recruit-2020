@@ -2,7 +2,11 @@ package meituan0423.Test3;
 
 import java.util.*;
 
-public class Main {
+/*
+Solution2
+ */
+
+class Solution1 {
 
     static class Rect{
         int x1, y1, x2, y2;
@@ -35,7 +39,7 @@ public class Main {
         }
     }
 
-    private static List<Interval> generateIntervals(Rect [] rects){
+    public static List<Interval> generateIntervals(Rect [] rects){
         List<Integer> xs = new ArrayList<>();
         for (Rect rect : rects){
             xs.add(rect.x1); xs.add(rect.x2);
@@ -49,7 +53,7 @@ public class Main {
         return intervals;
     }
 
-    private static List<Line> generateLines(Rect [] rects){
+    public static List<Line> generateLines(Rect [] rects){
         List<Line> lines = new ArrayList<>();
         for (Rect rect : rects){
             lines.add(new Line(rect.y1, 1, rect.x1, rect.x2));
@@ -59,7 +63,7 @@ public class Main {
         return lines;
     }
 
-    private static int getArea(List<Interval> intervals, List<Line> lines){
+    public static int getArea(List<Interval> intervals, List<Line> lines){
         int res = 0;
         for (Interval interval : intervals){
             int cnt = 0;
@@ -77,18 +81,114 @@ public class Main {
         return res;
     }
 
+
+}
+
+/*
+Solution2
+ */
+class Solution2 {
+
+    static class Rect{
+        int x1, y1, x2, y2;
+        Rect(int x1, int y1, int x2, int y2){
+            this.x1 = x1; this.y1 = y1;
+            this.x2 = x2; this.y2 = y2;
+        }
+    }
+
+    static class Interval{
+        int start, end;
+        Interval(int start, int end){
+            this.start = start; this.end = end;
+        }
+    }
+
+    static class Node{
+        int index;
+        boolean isEnd;
+        Interval interval;
+        Node(int index, boolean isEnd, Interval interval){
+            this.index = index; this.isEnd = isEnd;
+            this.interval = interval;
+        }
+    }
+
+    public static List<Node> generateNodes(Rect [] rects){
+        List<Node> nodes = new ArrayList<>();
+        for (Rect rect : rects){
+            Interval interval = new Interval(rect.y1, rect.y2);
+            nodes.add(new Node(rect.x1, false, interval));
+            nodes.add(new Node(rect.x2, true, interval));
+        }
+        Collections.sort(nodes, ((o1, o2) -> (o1.index - o2.index)));
+        return nodes;
+    }
+
+    public static int getIntervalsLen(List<Interval> intervals){
+        int len = 0;
+        Collections.sort(intervals, ((o1, o2) -> (o1.start - o2.start)));
+        int preEnd = -1;
+        for (Interval now : intervals){
+            if (preEnd == -1 || now.start > preEnd){
+                len += now.end - now.start;
+                preEnd = now.end;
+            } else if (now.end > preEnd){
+                len += now.end - preEnd;
+                preEnd = now.end;
+            }
+        }
+        return len;
+    }
+
+    public static int getArea(List<Node> nodes){
+        List<Interval> intervals = new ArrayList<>();
+        long res = 0;
+        int preIndex = 0;
+        for (Node node : nodes){
+            if (preIndex != node.index) {
+                res = (res + (long)getIntervalsLen(intervals) * (long)(node.index - preIndex)) % MOD;
+                preIndex = node.index;
+            }
+            if(node.isEnd) intervals.remove(node.interval);
+            else intervals.add(node.interval);
+
+        }
+        return (int)res;
+    }
+
+    public static final int MOD = 1000000007;
+
+}
+
+public class Main{
     public static void main(String[] args) {
+
+    }
+
+    public static void test1(){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Rect []rects = new Rect[n];
+        Solution1.Rect[]rects = new Solution1.Rect[n];
         while (n -- > 0){
-            rects[n] = new Rect(sc.nextInt(), sc.nextInt(), sc.nextInt(), sc.nextInt());
+            rects[n] = new Solution1.Rect(sc.nextInt(), sc.nextInt(), sc.nextInt(), sc.nextInt());
         }
-        List<Interval> intervals = generateIntervals(rects);
-        List<Line> lines = generateLines(rects);
+        List<Solution1.Interval> intervals = Solution1.generateIntervals(rects);
+        List<Solution1.Line> lines = Solution1.generateLines(rects);
         System.out.println(intervals);
         System.out.println(lines);
-        System.out.println(getArea(intervals, lines));
+        System.out.println(Solution1.getArea(intervals, lines));
+    }
+
+    public static void test2(){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Solution2.Rect []rects = new Solution2.Rect[n];
+        while (n -- > 0){
+            rects[n] = new Solution2.Rect(sc.nextInt(), sc.nextInt(), sc.nextInt(), sc.nextInt());
+        }
+        List<Solution2.Node> nodes = Solution2.generateNodes(rects);
+        System.out.println(Solution2.getArea(nodes));
     }
 }
 
