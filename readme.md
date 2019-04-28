@@ -69,6 +69,13 @@
    2. 运水果
    3. 数组消除
    
+1. **[度小满 04.28 笔试](https://github.com/liwan-github/recruit-2020/tree/master/src/duxiaoman0428)**
+
+   1. 判断数字
+   2. 买卖股票的最大收益时的最少交易次数
+   3. 站点经过次数的最大值
+   4. 判断只交换两个字符能不能组成回文串
+   
 1. **[招商银行 03.17 笔试](https://github.com/liwan-github/recruit-2020/tree/master/src/zhaoshang0317)**
    
    1. 大鱼吃小鱼
