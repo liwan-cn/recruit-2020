@@ -11,6 +11,7 @@ public class UnionFind {
         //初始化个数
         //初始化数组，每个并查集都指向自己
         this.root = new int[size];
+        this.count = size;
         Arrays.fill(this.root, -1);
     }
 
