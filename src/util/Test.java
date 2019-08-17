@@ -3,15 +3,57 @@ package util;
 import util.util.Comb;
 import util.util.Dijsktra;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static util.util.TopoSort.topoSort;
 
+class Solution {
+    public int maxSubMatrix(int[][] mat) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < mat.length; i++) {
+            int []nums = new int[mat[i].length];
+            for (int h = 0; h <= i; h++) {
+                int preSum = Integer.MIN_VALUE;
+                for (int j = 0; j < mat[i].length; j++) {
+                    nums[j] += mat[i-h][j];
+                    if (preSum > 0){
+                        preSum += nums[j];
+                    } else {
+                        preSum = nums[j];
+                    }
+                    max = Math.max(max, preSum);
+                }
+            }
+        }
+        return max;
+    }
+}
+
+
+class Solution2 {
+    public int[] rawSeq(int[] nums) {
+        Queue<Integer> q = new LinkedList<>();
+        int []raw = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            q.offer(i);
+        }
+        int index = 0;
+        while (!q.isEmpty()) {
+            raw[q.poll()] = nums[index++];
+            if (!q.isEmpty()){
+                q.offer(q.poll());
+            }
+        }
+        return raw;
+    }
+}
+
 public class Test {
     public static void main(String[] args) {
-        testTopoSort();
+        int [][]mat = new int[][]{{1,2,-4}, {4,5,-2}, {1, -1, 3}};
+        System.out.println(new Solution().maxSubMatrix(mat));
+        System.out.println(Arrays.toString(new Solution2().rawSeq(new int[]{1, 2, 3, 4, 5})));
+        //testTopoSort();
         //testComb();
     }
     public static void testTopoSort() {
