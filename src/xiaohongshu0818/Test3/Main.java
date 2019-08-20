@@ -2,6 +2,7 @@ package xiaohongshu0818.Test3;
 
 import java.util.*;
 
+// 82%
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
