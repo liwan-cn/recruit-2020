@@ -1,5 +1,7 @@
 package kickstart0825.Test1;
 
+// AC
+
 import java.util.Arrays;
 import java.util.Scanner;
 

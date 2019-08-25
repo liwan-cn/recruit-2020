@@ -1,5 +1,7 @@
 package kickstart0825.Test3;
 
+//TLE
+
 import java.util.Scanner;
 
 public class Main {
