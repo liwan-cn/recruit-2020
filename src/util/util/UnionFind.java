@@ -15,7 +15,7 @@ public class UnionFind {
         Arrays.fill(this.root, -1);
     }
 
-    private int count() {
+    public int count() {
         return count;
     }
 
