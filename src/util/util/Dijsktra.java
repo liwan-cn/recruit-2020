@@ -1,5 +1,9 @@
 package util.util;
 
+/**
+ * 迪杰斯特拉算法求单源最短路径
+ * 给定权重矩阵和起始点, 返回路径和花费
+ */
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +21,13 @@ public class Dijsktra {
             return "distance: " + distance + ", path: " + path.toString();
         }
     }
+
+    /**
+     * 迪杰斯特拉算法
+     * @param weight 权重矩阵, 自己到自己的距离为 0, 如果两个节点不直接连通为 -1
+     * @param start 起始点
+     * @return start节点到所有节点的最短路径和花费
+     */
     public static Path[] dijsktra(int [][] weight, int start){
         //自己到自己的距离为 0, 如果两个节点不直接连通为 -1
         int nodeCount = weight.length; //获取顶点个数
