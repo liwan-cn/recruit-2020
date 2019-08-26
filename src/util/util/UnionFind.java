@@ -1,12 +1,29 @@
 package util.util;
 
+/**
+ * 并查集, 路径压缩和union优化
+ */
+
 import java.util.Arrays;
 
 public class UnionFind {
 
+    /**
+     * 并查集根节点指针数组
+     * 当值小于0时, abs(root[i])为所在连通图节点个数
+     * 当值大于0时, root[i]为该节点的根节点(一个连通图中的根节点可以是任何节点)
+     */
     private int[] root;
+
+    /**
+     * 连通图的个数
+     */
     private int count;
 
+    /**
+     * 并查集构造函数
+     * @param size 节点个数
+     */
     public UnionFind(int size) {
         //初始化个数
         //初始化数组，每个并查集都指向自己
@@ -15,19 +32,43 @@ public class UnionFind {
         Arrays.fill(this.root, -1);
     }
 
+    /**
+     * 连通图的个数
+     * @return 连通图的个数
+     */
     public int count() {
         return count;
     }
 
+    public int[] getRoot() {
+        return root;
+    }
+
+    /**
+     * 查找节点所在连通图的根节点, 并在查找过程中完成路径压缩
+     * @param x 待查找的节点
+     * @return 节点所在连通图的根节点
+     */
     private int find(int x) {
         if(root[x] < 0) return x;
         return root[x] = find(root[x]);
     }
 
+    /**
+     * 判断两个节点是不是在同一个连通图中
+     * @param x 待查找的节点
+     * @param y 待查找的节点
+     * @return true or false 两个节点是不是在同一个连通图中
+     */
     public boolean isConnected(int x, int y) {
         return find(x) == find(y);
     }
 
+    /**
+     * 将两个节点合并到同一个连通图中(即将两个连通图合并)
+     * @param x 待合并节点
+     * @param y 待合并节点
+     */
     public void union(int x, int y) {
         //找出x所在的集合
         int xUnion = find(x);
@@ -46,51 +87,6 @@ public class UnionFind {
             }
             count --;
         }
-    }
-
-    private void print(int[] arr){
-        for(int p : arr){
-            System.out.print(p+"\t");
-        }
-        System.out.println();
-        for(int i = 0; i < arr.length; i++){
-            System.out.print(find(i)+"\t");
-        }
-        System.out.println();
-    }
-
-    public static void main(String[] args) {
-        int n = 10;
-        UnionFind union = new UnionFind(n);
-
-        System.out.println("初始parent：");
-        union.print(union.root);
-
-        System.out.println("连接了5 6 之后的parent：");
-        union.union(5, 6);
-        union.print(union.root);
-
-        System.out.println("连接了1 2 之后的parent：");
-        union.union(1, 2);
-        union.print(union.root);
-
-        System.out.println("连接了2 3 之后的parent：");
-        union.union(2, 3);
-        union.print(union.root);
-
-        System.out.println("连接了1 4 之后的parent：");
-        union.union(1, 4);
-        union.print(union.root);
-
-
-        System.out.println("连接了1 5 之后的parent：");
-        union.union(1, 5);
-        union.print(union.root);
-
-
-        System.out.println("1  6 是否连接：" + union.isConnected(1, 6));
-
-        System.out.println("1  8 是否连接：" + union.isConnected(1, 8));
     }
 
 }
