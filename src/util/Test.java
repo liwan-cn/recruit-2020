@@ -1,61 +1,64 @@
 package util;
 
-import util.util.Comb;
-import util.util.Dijsktra;
-
+import util.util.*;
 import java.util.*;
 
-import static util.util.TopoSort.topoSort;
-
-class Solution {
-    public int maxSubMatrix(int[][] mat) {
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < mat.length; i++) {
-            int []nums = new int[mat[i].length];
-            for (int h = 0; h <= i; h++) {
-                int preSum = Integer.MIN_VALUE;
-                for (int j = 0; j < mat[i].length; j++) {
-                    nums[j] += mat[i-h][j];
-                    if (preSum > 0){
-                        preSum += nums[j];
-                    } else {
-                        preSum = nums[j];
-                    }
-                    max = Math.max(max, preSum);
-                }
-            }
-        }
-        return max;
-    }
-}
-
-
-class Solution2 {
-    public int[] rawSeq(int[] nums) {
-        Queue<Integer> q = new LinkedList<>();
-        int []raw = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            q.offer(i);
-        }
-        int index = 0;
-        while (!q.isEmpty()) {
-            raw[q.poll()] = nums[index++];
-            if (!q.isEmpty()){
-                q.offer(q.poll());
-            }
-        }
-        return raw;
-    }
-}
 
 public class Test {
     public static void main(String[] args) {
-        int [][]mat = new int[][]{{1,2,-4}, {4,5,-2}, {1, -1, 3}};
-        System.out.println(new Solution().maxSubMatrix(mat));
-        System.out.println(Arrays.toString(new Solution2().rawSeq(new int[]{1, 2, 3, 4, 5})));
-        //testTopoSort();
+        testTopoSort();
         //testComb();
     }
+
+    public static void testPrimeSieve() {
+        PrimeSieve ps = new PrimeSieve();
+        for (int i = 100; i < 3000; i++) {
+            System.out.print(i + "\t");
+            System.out.println(ps.primeFactors(i));
+        }
+    }
+
+    private static void print(int[] arr){
+        for(int p : arr){
+            System.out.print(p+"\t");
+        }
+        System.out.println();
+    }
+
+    public static void testUnionFind(String[] args) {
+        int n = 10;
+        UnionFind union = new UnionFind(n);
+
+        System.out.println("初始parent：");
+        print(union.getRoot());
+
+        System.out.println("连接了5 6 之后的parent：");
+        union.union(5, 6);
+        print(union.getRoot());
+
+        System.out.println("连接了1 2 之后的parent：");
+        union.union(1, 2);
+        print(union.getRoot());
+
+        System.out.println("连接了2 3 之后的parent：");
+        union.union(2, 3);
+        print(union.getRoot());
+
+        System.out.println("连接了1 4 之后的parent：");
+        union.union(1, 4);
+        print(union.getRoot());
+
+
+        System.out.println("连接了1 5 之后的parent：");
+        union.union(1, 5);
+        print(union.getRoot());
+
+
+        System.out.println("1  6 是否连接：" + union.isConnected(1, 6));
+
+        System.out.println("1  8 是否连接：" + union.isConnected(1, 8));
+    }
+
     public static void testTopoSort() {
         List<int []> edges = new ArrayList<>();
         edges.add(new int[]{0, 1});
@@ -65,11 +68,9 @@ public class Test {
         edges.add(new int[]{3, 4});
         edges.add(new int[]{2, 4});
         //edges.add(new int[]{0, 1});
-        List<Integer> res = new ArrayList<>();
         //List<Integer>[] graph = TopoSort.buildGraph(edges, 5);
         //System.out.println(topoSort(graph, res));
-        System.out.println(topoSort(edges, 5, res));
-        System.out.println(res);
+        System.out.println(TopoSort.topoSort(edges, 5));
     }
 
     public static void testComb(){
@@ -95,5 +96,20 @@ public class Test {
         a[3][2] = 1;
         for (int i = 0; i < 4; i++)
             System.out.println(i + ":" + Arrays.toString(Dijsktra.dijsktra(a, i)));
+    }
+
+    public static void testMatQuickPower() {
+        int [][]a = new int[][]{{1,1}, {1, 0}};
+        int [][]c = MatQuickPower.matQuickPower(a, 20000000);
+        for (int i = 0; i < c.length; i++) {
+            System.out.println(Arrays.toString(c[i]));
+        }
+        c = a;
+        for (int i = 0; i < 20000000-1; i++){
+            c = MatQuickPower.matmul(c, a);
+        }
+        for (int i = 0; i < c.length; i++) {
+            System.out.println(Arrays.toString(c[i]));
+        }
     }
 }
