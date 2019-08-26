@@ -14,7 +14,7 @@ public class MinTree {
     }
     public static int minTree(List<Edge> list, int n) {
         //节点间的距离list, 节点个数n
-        Collections.sort(list, (o1, o2) -> o1.cost - o2.cost);
+        list.sort((o1, o2) -> o1.cost - o2.cost);
         int []unionFindSet = new int[n + 1];
         for(int i = 0;i <= n; i++)
             unionFindSet[i] = -1;
@@ -33,9 +33,7 @@ public class MinTree {
         if(unionFindSet[x] == -1)
             return x;
         else{
-            int tmp = findRoot(unionFindSet[x], unionFindSet);
-            unionFindSet[x] = tmp;
-            return tmp;
+            return unionFindSet[x] = findRoot(unionFindSet[x], unionFindSet);
         }
     }
 }
