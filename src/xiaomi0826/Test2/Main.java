@@ -12,10 +12,11 @@ public class Main {
         int t = sc.nextInt();
         while (t-- > 0) {
             int n = sc.nextInt();
-            for (int i = 1; i < n; i++) {
+            for (int i = 1, cnt = 1, f = cnt * cnt; i < n; i++) {
                 int tmp = sc.nextInt();
-                int f = (int)Math.sqrt(i);
-                if (f * f == i) {
+                if (f == i) {
+                    cnt ++;
+                    f = cnt * cnt;
                     System.out.print(tmp + " ");
                 }
             }
