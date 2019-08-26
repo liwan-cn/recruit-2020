@@ -1,10 +1,18 @@
 package util.util;
 
-import java.util.Arrays;
+/**
+ * 矩阵快速幂运算
+ */
 
 public class MatQuickPower {
     public static final int MOD = 100_000_007;
 
+    /**
+     * 矩阵快速幂
+     * @param a 原始矩阵, 必须为方阵
+     * @param k 幂指数
+     * @return 矩阵 a 的 k 次方
+     */
     public static int[][] matQuickPower(int [][]a, int k) {
         if (k == 1) return a;
         int [][]tmp = matQuickPower(a, k >> 1);
@@ -12,6 +20,12 @@ public class MatQuickPower {
         else return matmul(matmul(tmp, tmp), a);
     }
 
+    /**
+     * 矩阵乘法
+     * @param a 矩阵 a
+     * @param b 矩阵 b
+     * @return a * b 的结果
+     */
     public static int[][] matmul(int [][]a, int [][]b) {
         int [][]c = new int[a.length][b[0].length];
         for (int i = 0; i < a.length; i++) {
@@ -24,18 +38,4 @@ public class MatQuickPower {
         return c;
     }
 
-    public static void main(String[] args) {
-        int [][]a = new int[][]{{1,1}, {1, 0}};
-        int [][]c = matQuickPower(a, 20000000);
-        for (int i = 0; i < c.length; i++) {
-            System.out.println(Arrays.toString(c[i]));
-        }
-        c = a;
-        for (int i = 0; i < 20000000-1; i++){
-            c = matmul(c, a);
-        }
-        for (int i = 0; i < c.length; i++) {
-            System.out.println(Arrays.toString(c[i]));
-        }
-    }
 }
