@@ -39,6 +39,10 @@ public class Mod {
 
     /**
      * 分数求模
+     * 费马小定理 a^(p-1) mod p = 1 mod p
+     * a * a^(p-2) mod p = 1 mod p
+     * a^(p-2) mod p = a^(-1) mod p
+     * (b/a) % p = b * a^(-1) % p = b * a^(p-2) % p
      * @param a 分母
      * @param b 分子
      * @return (b/a) % MOD
