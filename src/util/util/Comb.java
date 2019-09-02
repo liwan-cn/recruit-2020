@@ -5,6 +5,8 @@ package util.util;
  */
 
 public class Comb {
+
+    public static final int MOD = 1_000_000_007;
     /**
      * 求组合数 C(n, m), 即从 n 个不同的数中取 m 个, 共有多少种取法
      * @param n
@@ -18,7 +20,7 @@ public class Comb {
         }
         for(int i = 1; i <= n; i++){
             for (int j = 1; j <= m;j++){
-                dp[i][j] = dp[i-1][j-1] + dp[i-1][j];
+                dp[i][j] = (dp[i-1][j-1] + dp[i-1][j]) % MOD;
             }
         }
         return dp;

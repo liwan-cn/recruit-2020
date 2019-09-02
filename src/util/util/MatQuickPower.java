@@ -5,7 +5,7 @@ package util.util;
  */
 
 public class MatQuickPower {
-    public static final int MOD = 100_000_007;
+    public static final int MOD = 1_000_000_007;
 
     /**
      * 矩阵快速幂
